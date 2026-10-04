@@ -6,9 +6,22 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/admin/dashboard')->name('home');
+/*
+|--------------------------------------------------------------------------
+| PUBLIC ROUTES (Website User)
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN ROUTES
+|--------------------------------------------------------------------------
+*/
 
 Route::prefix('admin')
     ->name('admin.')
@@ -24,10 +37,9 @@ Route::prefix('admin')
         Route::resource('order', OrderController::class)
             ->only(['index', 'show', 'update']);
 
-         Route::resource('post', PostController::class)
+        Route::resource('post', PostController::class)
             ->parameters(['post' => 'slug']);
-        
-        // Setting (cuma 2 route, gak perlu resource)
+
         Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
         Route::put('/setting', [SettingController::class, 'update'])->name('setting.update');
     });
