@@ -87,7 +87,7 @@
                             </td>
                             <td class="px-5 py-3 text-blue-900 dark:text-sky-100">{{ $order->customer_name }}</td>
                             <td class="px-5 py-3 text-blue-700 dark:text-sky-300">
-                                Rp {{ number_format($order->price, 0, ',', '.') }}
+                                Rp {{ number_format($order->total_price, 0, ',', '.') }}
                             </td>
                             <td class="px-5 py-3">
                                 <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold

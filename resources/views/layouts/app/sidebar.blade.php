@@ -1,6 +1,7 @@
 {{-- resources/views/layouts/app/sidebar.blade.php --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     @include('partials.head')
     <style>
@@ -63,6 +64,7 @@
         }
     </style>
 </head>
+
 <body class="min-h-screen">
 
     <flux:sidebar sticky collapsible="mobile" class="furina-glass">
@@ -72,6 +74,7 @@
         </flux:sidebar.header>
 
         <flux:sidebar.nav>
+
             <flux:sidebar.group :heading="__('Dashboard')" class="grid">
                 <flux:sidebar.item icon="home" :href="route('admin.dashboard')"
                     :current="request()->routeIs('admin.dashboard')" wire:navigate>
@@ -121,21 +124,46 @@
                     </flux:sidebar.item>
                 @endif
             </flux:sidebar.group>
+
         </flux:sidebar.nav>
 
         <flux:spacer />
 
-        <div class="px-4 py-3 border-t border-white/40 dark:border-sky-500/20 text-xs text-blue-900/70 dark:text-sky-200/70">
-            FlyRif Service
+        {{-- User info + Logout --}}
+        <div class="border-t border-white/40 px-4 py-3 dark:border-sky-500/20">
+            <div class="flex items-center gap-3 mb-3">
+                <div
+                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
+                    {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="truncate text-xs font-semibold text-blue-900 dark:text-sky-100">
+                        {{ auth()->user()->name ?? 'Admin' }}
+                    </div>
+                    <div class="truncate text-[10px] text-blue-500 dark:text-sky-400">
+                        {{ auth()->user()->email ?? '' }}
+                    </div>
+                </div>
+            </div>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit"
+                    class="w-full rounded-lg border border-sky-300/60 bg-white/50 backdrop-blur-md px-3 py-2 text-xs font-semibold text-sky-700 shadow-sm transition hover:border-sky-400 hover:bg-sky-50 hover:shadow dark:border-sky-500/30 dark:bg-slate-900/50 dark:text-sky-300 dark:hover:bg-sky-900/30">
+                    Logout
+                </button>
+            </form>
         </div>
     </flux:sidebar>
 
     {{ $slot }}
 
     @persist('toast')
-        <flux:toast.group><flux:toast /></flux:toast.group>
+        <flux:toast.group>
+            <flux:toast />
+        </flux:toast.group>
     @endpersist
 
     @fluxScripts
 </body>
+
 </html>

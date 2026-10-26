@@ -15,6 +15,8 @@ class Service extends Model
         'slug',
         'description',
         'price',
+        'is_daily',
+        'duration_days',
         'estimated_days',
         'image',
         'is_active',
@@ -23,8 +25,15 @@ class Service extends Model
 
     protected $casts = [
         'price' => 'decimal:2',
+        'is_daily' => 'boolean',
+        'duration_days' => 'integer',
         'is_active' => 'boolean',
     ];
+
+    public function game()
+    {
+        return $this->belongsTo(Game::class);
+    }
 
     public function getRouteKeyName(): string
     {

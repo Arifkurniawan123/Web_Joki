@@ -3,15 +3,15 @@
 ])
 
 @if($sidebar)
-    <flux:sidebar.brand :name="config('app.name', 'Laravel')" {{ $attributes }}>
-        <x-slot name="logo" class="flex aspect-square size-8 items-center justify-center rounded-md bg-accent-content text-accent-foreground">
-            <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" />
-        </x-slot>
-    </flux:sidebar.brand>
+    {{-- Logo untuk di Sidebar Admin --}}
+    <a href="{{ route('admin.dashboard') }}" {{ $attributes->merge(['class' => 'flex items-center gap-2']) }}>
+        <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="h-8 w-auto object-contain">
+        <span class="font-bold text-lg">{{ config('app.name', 'Laravel') }}</span>
+    </a>
 @else
-    <flux:brand :name="config('app.name', 'Laravel')" {{ $attributes }}>
-        <x-slot name="logo" class="flex aspect-square size-8 items-center justify-center rounded-md bg-accent-content text-accent-foreground">
-            <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" />
-        </x-slot>
-    </flux:brand>
+    {{-- Logo untuk di Halaman Login/Register --}}
+    <a href="{{ route('home') }}" {{ $attributes->merge(['class' => 'flex items-center gap-2']) }}>
+        <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="h-12 w-auto object-contain">
+        <span class="font-bold text-xl">{{ config('app.name', 'Laravel') }}</span>
+    </a>
 @endif

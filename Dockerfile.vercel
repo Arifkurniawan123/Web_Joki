@@ -1,0 +1,23 @@
+FROM dunglas/frankenphp:1-php8.2-bookworm
+
+# Install ekstensi PHP buat Laravel + PostgreSQL
+RUN install-php-extensions pdo_pgsql intl zip bcmath
+
+WORKDIR /app
+COPY . .
+
+# Install Composer & dependencies production
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+RUN composer install --no-dev --optimize-autoloader
+
+# Set permission
+RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
+
+# Copy Caddyfile
+COPY Caddyfile /etc/frankenphp/Caddyfile
+
+ENV PORT=80
+ENV APP_ENV=production
+ENV APP_DEBUG=false
+
+CMD ["frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile"]

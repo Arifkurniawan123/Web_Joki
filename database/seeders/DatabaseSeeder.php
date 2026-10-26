@@ -15,11 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // ... seeder bawaan (kalau ada)
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            StarRailServiceSeeder::class,
+            ZenlessZoneZeroServiceSeeder::class,
+            GenshinServiceSeeder::class,
+            WutheringWavesServiceSeeder::class, 
         ]);
     }
 }

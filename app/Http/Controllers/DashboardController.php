@@ -16,7 +16,7 @@ class DashboardController extends Controller
             'pending_orders'  => Order::where('status', Order::STATUS_PENDING)->count(),
             'process_orders'  => Order::where('status', Order::STATUS_PROCESS)->count(),
             'done_orders'     => Order::where('status', Order::STATUS_DONE)->count(),
-            'total_revenue'   => Order::where('status', Order::STATUS_DONE)->sum('price'),
+            'total_revenue'   => Order::where('status', Order::STATUS_DONE)->sum('total_price'),
             'total_games'     => Game::count(),
             'total_services'  => Service::count(),
             'total_posts'     => Post::count(),

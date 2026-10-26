@@ -22,6 +22,11 @@ class Game extends Model
         'is_active' => 'boolean',
     ];
 
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+
     public function getRouteKeyName(): string
     {
         return 'slug';
