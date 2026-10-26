@@ -1,5 +1,4 @@
-FROM dunglas/frankenphp:1-php8.2-bookworm
-
+FROM dunglas/frankenphp:1-php8.3-bookworm
 # Install ekstensi PHP buat Laravel + PostgreSQL
 RUN install-php-extensions pdo_pgsql intl zip bcmath
 
