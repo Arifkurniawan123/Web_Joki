@@ -57,7 +57,8 @@
                     @enderror
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
+                {{-- Diubah jadi grid-cols-1 di HP, grid-cols-2 di laptop --}}
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-blue-900 dark:text-sky-200 mb-1">Harga (Rp)</label>
                         <flux:input type="number" name="price" value="{{ old('price', $service->price) }}" />
@@ -84,7 +85,8 @@
                     @enderror
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
+                {{-- Diubah jadi grid-cols-1 di HP, grid-cols-2 di laptop --}}
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-blue-900 dark:text-sky-200 mb-1">Urutan</label>
                         <flux:input type="number" name="sort_order"
@@ -98,8 +100,6 @@
                         </div>
                     </div>
                 </div>
-
-
 
             </div>
 

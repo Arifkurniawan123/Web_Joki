@@ -58,7 +58,8 @@
                     @enderror
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
+                {{-- Diubah jadi grid-cols-1 di HP, grid-cols-2 di laptop --}}
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-blue-900 dark:text-sky-200 mb-1">Harga (Rp)</label>
                         <flux:input type="number" name="price" value="{{ old('price') }}" placeholder="150000" />
@@ -85,7 +86,8 @@
                     @enderror
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
+                {{-- Diubah jadi grid-cols-1 di HP, grid-cols-2 di laptop --}}
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-blue-900 dark:text-sky-200 mb-1">Urutan</label>
                         <flux:input type="number" name="sort_order" value="{{ old('sort_order', 0) }}" />
@@ -95,31 +97,6 @@
                         <div class="pt-2">
                             <flux:checkbox name="is_active" value="1" :checked="old('is_active', true)"
                                 label="Aktif" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border-t border-white/40 dark:border-sky-500/20 pt-5 mt-5">
-                    <h3 class="font-semibold text-blue-900 dark:text-sky-100 mb-3">Rawat Akun (Opsional)</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" name="is_daily" id="is_daily_check" value="1"
-                                    @checked(old('is_daily'))
-                                    class="rounded border-zinc-300 text-blue-600 focus:ring-blue-500">
-                                <span class="text-sm font-medium text-blue-900 dark:text-sky-200">Jadikan Layanan Rawat
-                                    Akun</span>
-                            </label>
-                        </div>
-
-                        <div id="duration_field" class="{{ old('is_daily') ? '' : 'hidden' }}">
-                            <label class="block text-sm font-medium text-blue-900 dark:text-sky-200 mb-1">Durasi
-                                (Hari)</label>
-                            <flux:input type="number" name="duration_days" value="{{ old('duration_days', 30) }}"
-                                placeholder="30" />
-                            @error('duration_days')
-                                <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
-                            @enderror
                         </div>
                     </div>
                 </div>
