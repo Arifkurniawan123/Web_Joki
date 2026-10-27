@@ -1,4 +1,3 @@
-{{-- resources/views/layouts/app/sidebar.blade.php --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -30,6 +29,16 @@
             filter: blur(0.5px) saturate(120%);
             mask-image: radial-gradient(circle, black 45%, transparent 85%);
             -webkit-mask-image: radial-gradient(circle, black 45%, transparent 85%);
+        }
+
+        /* --- TAMBAHAN: Sesuaikan ukuran gambar Furina di HP --- */
+        @media (max-width: 768px) {
+            body::before {
+                width: 450px;
+                height: 450px;
+                right: -150px;
+                opacity: 0.2; /* Dibikin lebih transparan biar teks kebaca */
+            }
         }
 
         .furina-glass {
@@ -74,7 +83,6 @@
         </flux:sidebar.header>
 
         <flux:sidebar.nav>
-
             <flux:sidebar.group :heading="__('Dashboard')" class="grid">
                 <flux:sidebar.item icon="home" :href="route('admin.dashboard')"
                     :current="request()->routeIs('admin.dashboard')" wire:navigate>
@@ -124,7 +132,6 @@
                     </flux:sidebar.item>
                 @endif
             </flux:sidebar.group>
-
         </flux:sidebar.nav>
 
         <flux:spacer />
@@ -132,8 +139,7 @@
         {{-- User info + Logout --}}
         <div class="border-t border-white/40 px-4 py-3 dark:border-sky-500/20">
             <div class="flex items-center gap-3 mb-3">
-                <div
-                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
+                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
                     {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
                 </div>
                 <div class="flex-1 min-w-0">
@@ -155,7 +161,16 @@
         </div>
     </flux:sidebar>
 
-    {{ $slot }}
+    {{-- TAMBAHAN: Header untuk Mobile (Tombol Menu) --}}
+    <flux:header class="lg:hidden sticky top-0 z-50 bg-white/80 backdrop-blur dark:bg-zinc-900/80 border-b border-zinc-200 dark:border-zinc-800">
+        <flux:sidebar.toggle class="lg:hidden" icon="bars-3" inset="left" />
+        <flux:spacer />
+        <span class="font-bold text-sm">{{ config('app.name') }}</span>
+    </flux:header>
+
+    <div class="relative z-10">
+        {{ $slot }}
+    </div>
 
     @persist('toast')
         <flux:toast.group>
