@@ -5,13 +5,14 @@
 @endphp
 
 <footer class="w-full border-t border-zinc-200 dark:border-zinc-800">
-    <div class="mx-auto max-w-7xl px-6 py-10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 py-10">
 
+        {{-- Layout Flex: Numpuk vertikal di HP, sejajar di Desktop --}}
         <div class="flex flex-col items-center gap-8 md:flex-row md:justify-center md:gap-16 text-center md:text-left">
 
             <div>
                 <div class="font-semibold">{{ $brandName }}</div>
-                <p class="mt-2 max-w-sm text-sm text-zinc-600 dark:text-zinc-400">
+                <p class="mt-2 max-w-sm text-sm text-zinc-600 dark:text-zinc-400 mx-auto md:mx-0">
                     {{ \App\Models\Setting::get('description', 'Jasa joki game terpercaya.') }}
                 </p>
             </div>
